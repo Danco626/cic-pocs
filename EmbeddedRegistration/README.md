@@ -83,3 +83,10 @@ A [login action](https://auth0.com/docs/customize/actions/write-your-first-actio
   1. Create a [login action]([link](https://auth0.com/docs/customize/actions/write-your-first-action#create-an-action))
   2. Copy the code from [addSessionId.js](./CICLoginActions//addSessionId.js), save, and deploy the action 
  
+
+ ### Testing  
+ 1. Configure both applications by following the instructions in their readme  
+ 2. Navigate to the Login application (localhost:3000) and click Register
+ 3. You'll redirect to the Registration application
+ 4. Coomplete the registration form and submit
+ 5. Your account is created and you'll be redirected back to the Login application's registrationCallback  
