@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Registration</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="//cdn2.auth0.com/styleguide/latest/lib/logos/img/favicon.png"
+    />
+  </head>
+  <body>
+    <div class="w-full max-w-xs">
+      <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+        <span id="error-message"
+        style="display:none; color: red;">...</span>
+        <div class="mb-4">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="username"
+          >
+            Email
+          </label>
+          <input
+            class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            id="username"
+            type="text"
+            placeholder="Email"
+          />
+        </div>
+        <div class="mb-6">
+          <label
+            class="block text-gray-700 text-sm font-bold mb-2"
+            for="password"
+          >
+            Password
+          </label>
+          <input
+            class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+            id="password"
+            type="password"
+            placeholder="******************"
+          />       
+        </div>
+        <div class="flex items-center justify-between">
+          <button
+            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            id="btn-signup"
+            type="button"
+          >
+            Register
+          </button>
+        </div>
+      </form>
+      <p class="text-center text-gray-500 text-xs"></p>
+    </div>
+
+    <script src="https://cdn.auth0.com/js/auth0/9.19/auth0.min.js"></script>
+    <script src="https://cdn.auth0.com/js/polyfills/1.0/object-assign.min.js"></script>
+    <script>
+      window.onload = () => {
+        const config = {
+          domain: "<%= domain %>",
+          clientID: "<%= clientId %>",
+          responseType: "<%= responseType %>",
+          redirectUri: "<%= redirectUri %>"          
+        };
+        
+        //config.extraParams = config.extraParams || {};        
+        config.connection = "Username-Password-Authentication";
+        console.log(config);
+        const webAuth = new auth0.WebAuth(config);
+
+        const btnSignup = document.getElementById("btn-signup");
+
+        function signup() {          
+          const username = document.getElementById("username").value;
+          const email =
+            document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          removeError();
+
+          webAuth.redirect.signupAndLogin(
+            {
+              email: email,
+              password: password,
+              state: "<%= state %>",
+              scope: "<%= scope %>",
+              connection: config.connection,
+              sessionid: "<%= sessionid %>"
+            },
+            function (err) {
+              if (err) displayError(err);              
+            }
+          );
+        }
+
+        function removeError() {
+          const errorMessage = document.getElementById("error-message");
+          errorMessage.style.display = "none";
+        }
+
+        function displayError(err) {
+          const errorMessage = document.getElementById("error-message");
+          let message = err.message;
+        
+          errorMessage.innerHTML = JSON.stringify(err);
+          errorMessage.style.display = "block";
+        }
+
+        btnSignup.addEventListener("click", signup);        
+      };
+    </script>
+  </body>
+</html>
