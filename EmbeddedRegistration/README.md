@@ -77,14 +77,14 @@ The signup form collects the user's email and password, then initiates signup + 
 
     [Limitations](https://auth0.com/docs/authenticate/login/cross-origin-authentication#limitations)  
 
-### Login Action  
+## Login Action  
 A [login action](https://auth0.com/docs/customize/actions/write-your-first-action#create-an-action) is required for enriching the id token with the session id. When the authenticating application's callback recieves the id token, it extracts the sessionId claim and compares it to the sessionId in the cookie.  
 
   1. Create a [login action]([link](https://auth0.com/docs/customize/actions/write-your-first-action#create-an-action))
   2. Copy the code from [addSessionId.js](./CICLoginActions//addSessionId.js), save, and deploy the action 
  
 
- ### Testing  
+ ## Testing  
  1. Configure both applications by following the instructions in their readme  
  2. Navigate to the Login application (localhost:3000) and click Register
  3. You'll redirect to the Registration application
