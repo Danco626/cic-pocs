@@ -32,6 +32,15 @@ The Machine to Machine action executes during the client credentials flow, inclu
 
 The [addCustomerId](./CICM2MActions/addCustomerId.js) M2M action gets the customer id from the authenticating application's metadata and adds it to the access token in a custom claim. Having the customer id in the access token will make authorization easier for your APIs.
 
+## Security Concerns  
+* CIC mints the tokens, but the Authentication service takes over as the resource server issuing tokens to the clients. This deviates from the typical client credentials flow.
+* The authentication service must be secured. All application secrets are flowing through this service. If it's compromised, the attacker can impersonate numerous customers.
+  - Alternatively, the client can bypass the proxy and call CIC directly.
+    - Doing so removes the ability to monitor rate limits and throttle
+* Customers can make calls directly to CIC, bypassing the Authentication service.  
+  - The M2M action should be updated to block incloming requests from IPs outside of your network  
+
+
 ## Configure the CIC (Auth0) Tenant
 ### Configure API in CIC  
 1. Create an [API](https://auth0.com/docs/get-started/auth0-overview/set-up-apis)  
