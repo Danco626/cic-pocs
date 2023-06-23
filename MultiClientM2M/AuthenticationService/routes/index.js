@@ -28,10 +28,10 @@ const AuthenticationClient = require("auth0").AuthenticationClient;
  */
 router.post("/m2mauth", async (req, res, next) => {
   try{    
-    const {clientId, clientSecret, permissions} = req.body;
+    const {clientId, clientSecret} = req.body;
 
     const auth = new AuthenticationClient({domain: process.env.ISSUER_BASE_URL.replace("https://", ""), clientId, clientSecret});
-    const response = await auth.clientCredentialsGrant({audience:process.env.AUDIENCE, scope:permissions})
+    const response = await auth.clientCredentialsGrant({audience:process.env.AUDIENCE})
 
     res.send(response)
   } catch(e){

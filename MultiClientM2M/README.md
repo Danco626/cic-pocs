@@ -23,8 +23,7 @@ The M2M auth route initiates the client credentials flow using the request body.
 ```json
 {
   "clientId": "uNtntSBJnrbys", 
-  "clientSecret": "SAeDT6Ose97BbEx2_JSvqz", 
-  "permissions":"read:data write:data"
+  "clientSecret": "SAeDT6Ose97BbEx2_JSvqz"
 }
 ```
 ## Client Credentials Action 

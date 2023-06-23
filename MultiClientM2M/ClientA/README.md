@@ -14,7 +14,6 @@ npm install
 - `AUTH_API_URL` - absolute URL to the Authentication Service (ie: `http://localhost:3001`)
 - `M2M_CLIENT_ID` - the ClientA application's client id
 - `M2M_CLIENT_SECRET` - the ClientA application's client secret
-- `PERMISSIONS` - The permissions assigned to ClientA when configuring the API
 
 ```bash
 mv .env.example .env
